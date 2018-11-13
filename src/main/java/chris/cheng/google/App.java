@@ -98,12 +98,22 @@ public class App {
 
     //真正调用Google Translation API的入口
     private static String translateSingleSentence(Translate translate, String source){
-        Translation translation =
-                translate.translate(
-                        source,
-                        TranslateOption.sourceLanguage(translate.detect(source).getLanguage()),
-                        TranslateOption.targetLanguage(TARGET_LANGUAGE));
-        return translation.getTranslatedText().replace("&#39;", "\'").replace("&quot;","\"");
+        String sourceLanguage = translate.detect(source).getLanguage();
+        String translatedSentence = null;
+        if(sourceLanguage.toUpperCase().equals(TARGET_LANGUAGE.toUpperCase())){
+            translatedSentence = source;
+        }
+        else{
+            Translation translation =
+                    translate.translate(
+                            source,
+                            TranslateOption.sourceLanguage(translate.detect(source).getLanguage()),
+                            TranslateOption.targetLanguage(TARGET_LANGUAGE));
+            translatedSentence = translation.getTranslatedText().
+                    replace("&#39;", "\'").replace("&quot;","\"");
+        }
+
+        return translatedSentence;
     }
 
     public static void main(String[] args){
