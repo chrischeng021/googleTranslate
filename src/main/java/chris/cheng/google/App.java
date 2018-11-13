@@ -107,14 +107,6 @@ public class App {
     }
 
     public static void main(String[] args){
-        //process(args[0]);
-        String text = "这是一条测试语句";
-        System.out.println(text);
-        Translation translation =
-                translate.translate(
-                        text,
-                        TranslateOption.sourceLanguage(translate.detect(text).getLanguage()),
-                        TranslateOption.targetLanguage(TARGET_LANGUAGE));
-        System.out.println(translation.getTranslatedText().toString());
+        process(args[0]);        
     }
 }
